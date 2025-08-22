@@ -1,0 +1,266 @@
+{
+  // ─────コードフォーマット & Lint ────────────────
+  // Prettierの設定ファイルのパスを指定（ワークスペースルート直下にある場合）
+  "prettier.configPath": "./prettier.config.mjs",
+
+  // ESLint設定
+  "eslint.useFlatConfig": true,
+  "eslint.enable": true,
+  "eslint.run": "onType",
+  "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
+
+  // Code Actions on Save（v1.85+の新しい設定方式）
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit"
+    // "source.organizeImports": "explicit"
+  },
+
+  // デフォルトのフォーマッターを Prettier に設定
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  // ファイル保存時にフォーマットを実行（グローバル設定）
+  "editor.formatOnSave": true,
+
+  // Auto Save設定でもCode Actionsを実行する場合は"always"に変更
+  // "editor.codeActionsOnSave": {
+  //   "source.fixAll.eslint": "always",
+  //   "source.organizeImports": "always"
+  // },
+  // ──────────────────────────────────────
+
+  // ──────────────────────────────────────
+  // スペルチェック（cSpell）
+  // ──────────────────────────────────────
+
+  "cSpell.ignoreRegExpList": ["[０-９Ａ-Ｚａ-ｚぁ-んァ-ヶ亜-熙纊-黑]+"],
+  "cSpell.customDictionaries": {
+    "words": {
+      "name": "words",
+      "path": "${workspaceFolder}/.vscode/cspell.txt"
+    },
+    "custom": true,
+    "internal-terms": true
+  },
+
+  // ──────────────────────────────────────
+  // エディタ設定
+  // ──────────────────────────────────────
+
+  // インポートの自動整理
+  "editor.organizeImportsOnSave": true,
+
+  // インライン提案の設定
+  "editor.inlineSuggest.enabled": true,
+
+  // 括弧の自動閉じ
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always",
+
+  // タブサイズとインデント
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.detectIndentation": true,
+
+  // ──────────────────────────────────────
+  // ファイル管理
+  // ──────────────────────────────────────
+
+  // VSCodeのファイルツリーに表示しないファイルやディレクトリ
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/node_modules": true,
+    "**/.turbo": true,
+    ".next": true,
+    "**/bin": true,
+    "**/obj": true,
+    "**/.pnpm-store": true,
+    "**/coverage": true,
+    "**/.nyc_output": true
+  },
+
+  // ファイル自動保存設定
+  "files.autoSave": "onFocusChange",
+  "files.autoSaveDelay": 1000,
+
+  // 改行文字の設定
+  "files.eol": "\n",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+
+  // ──────────────────────────────────────
+  // 言語別設定
+  // ──────────────────────────────────────
+
+  // JavaScript/TypeScript系 - formatOnPasteのみ追加
+  "[javascript]": {
+    "editor.formatOnPaste": true
+  },
+  "[javascriptreact]": {
+    "editor.formatOnPaste": true
+  },
+  "[typescript]": {
+    "editor.formatOnPaste": true
+  },
+  "[typescriptreact]": {
+    "editor.formatOnPaste": true
+  },
+
+  // JSON系 - グローバル設定を使用（設定不要）
+
+  // Markdown - 言語固有設定のみ
+  "[markdown]": {
+    "editor.formatOnPaste": true,
+    "editor.wordWrap": "on",
+    "editor.quickSuggestions": {
+      "comments": "off",
+      "strings": "off",
+      "other": "off"
+    }
+  },
+
+  // HTML/CSS系 - formatOnPasteのみ追加
+  "[html]": {
+    "editor.formatOnPaste": true
+  },
+  "[css]": {
+    "editor.formatOnPaste": true
+  },
+  "[scss]": {
+    "editor.formatOnPaste": true
+  },
+
+  // その他
+  "[handlebars]": {
+    "editor.formatOnSave": false,
+    "editor.formatOnPaste": false
+  },
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml",
+    "editor.autoIndent": "advanced",
+    "editor.formatOnSave": false,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 2
+  },
+  "yaml.format.enable": false,
+  // テンプレート構文を使用するYAMLファイルのワイルドカードパターン
+  "yaml.customTags": ["!*", "{{*}}"],
+  // Handlebarsテンプレート構文を含むファイルのカスタマイザ
+  "files.associations": {
+    "**/components/canvas/*.yaml": "yaml-template"
+  },
+  "[yaml-template]": {
+    "editor.formatOnSave": false
+  },
+
+  // ──────────────────────────────────────
+  // PHP設定
+  // ──────────────────────────────────────
+
+  // Intelephense PHP Language Server の設定
+  "intelephense.stubs": ["wordpress"],
+  "[php]": {
+    "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
+    "editor.formatOnSave": true,
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true
+  },
+
+  // ──────────────────────────────────────
+  // TypeScript設定
+  // ──────────────────────────────────────
+
+  // TypeScript設定の強化
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "typescript.suggest.autoImports": true,
+  "typescript.suggest.completeFunctionCalls": true,
+  "typescript.preferences.importModuleSpecifier": "relative",
+  "typescript.workspaceSymbols.scope": "currentProject",
+
+  // ──────────────────────────────────────
+  // Next.js/React設定
+  // ──────────────────────────────────────
+
+  "emmet.includeLanguages": {
+    "javascript": "javascriptreact",
+    "typescript": "typescriptreact"
+  },
+  "emmet.triggerExpansionOnTab": true,
+
+  // ──────────────────────────────────────
+  // Git設定
+  // ──────────────────────────────────────
+
+  "git.enableSmartCommit": true,
+  "git.confirmSync": false,
+  "git.autofetch": true,
+  "git.autoStash": true,
+
+  // ──────────────────────────────────────
+  // Markdownlint設定
+  // ──────────────────────────────────────
+
+  "markdownlint.config": {
+    "default": true,
+    "MD001": false, // Heading levels should only increment by one level at a time
+    "MD004": false, // Unordered list style
+    "MD007": false, // Unordered list indentation
+    "MD009": false, // Trailing spaces
+    "MD012": false, // Multiple consecutive blank lines
+    "MD013": false, // Line length
+    "MD022": false, // Headings should be surrounded by blank lines
+    "MD024": false, // Multiple headings with the same content
+    "MD025": false, // Multiple top level headings in the same document
+    "MD026": false, // Trailing punctuation in heading
+    "MD029": false, // Ordered list item prefix
+    "MD031": false, // Fenced code blocks should be surrounded by blank lines
+    "MD032": false, // Lists should be surrounded by blank lines
+    "MD033": false, // Inline HTML
+    "MD034": false, // Bare URL used
+    "MD036": false, // Emphasis used instead of a heading
+    "MD040": false, // Fenced code blocks should have a language specified
+    "MD041": false, // First line in file should be a top level heading
+    "MD045": false, // Images should have alternate text (alt text)
+    "MD046": false, // Code block style
+    "MD047": false // Files should end with a single newline character
+  },
+
+  // ──────────────────────────────────────
+  // その他の開発効率化設定
+  // ──────────────────────────────────────
+
+  // ミニマップ
+  "editor.minimap.enabled": true,
+  "editor.minimap.maxColumn": 120,
+
+  // ブレッドクラム
+  "breadcrumbs.enabled": true,
+
+  // インデントガイド
+  "editor.guides.indentation": true,
+  "editor.guides.bracketPairs": true,
+
+  // カーソル
+  "editor.cursorBlinking": "smooth",
+  "editor.cursorSmoothCaretAnimation": "on",
+
+  // Explorer
+  "explorer.compactFolders": false,
+  "explorer.confirmDragAndDrop": false,
+  "explorer.confirmDelete": false,
+
+  // ターミナル
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.cursorBlinking": true,
+  "terminal.integrated.cursorStyle": "line",
+
+  // ワークベンチ
+  "workbench.editor.tabSizing": "shrink",
+  "workbench.editor.closeEmptyGroups": true,
+  "workbench.startupEditor": "welcomePage"
+}

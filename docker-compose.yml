@@ -1,0 +1,17 @@
+services:
+  n8n-pysrv:
+    build: .
+    container_name: n8n-python-server
+    ports:
+      - "${PORT}:8000"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    restart: unless-stopped
+    networks:
+      - n8n-network
+
+networks:
+  n8n-network:
+    driver: bridge

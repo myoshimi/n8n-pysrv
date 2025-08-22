@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "saoudrizwan.claude-dev",
+    "editorconfig.editorconfig",
+    "dbaeumer.vscode-eslint",
+    "hoovercj.vscode-power-mode",
+    "eamodio.gitlens",
+    "usernamehw.errorlens",
+    "oderwat.indent-rainbow",
+    "esbenp.prettier-vscode",
+    "rvest.vs-code-prettier-eslint",
+    "streetsidesoftware.code-spell-checker"
+  ]
+}

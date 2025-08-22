@@ -1,0 +1,40 @@
+# Git関連
+.git
+.gitignore
+
+# IDE関連
+.vscode
+*.code-workspace
+.idea
+
+# Python関連
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.pytest_cache
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+
+# Node.js関連
+node_modules
+npm-debug.log*
+
+# OS関連
+.DS_Store
+Thumbs.db
+
+# その他
+*.tmp
+*.swp
+*.swo
+README.md
