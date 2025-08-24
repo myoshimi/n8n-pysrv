@@ -1,13 +1,18 @@
 {
   // ─────コードフォーマット & Lint ────────────────
   // Prettierの設定ファイルのパスを指定（ワークスペースルート直下にある場合）
-  "prettier.configPath": "./prettier.config.mjs",
+  // "prettier.configPath": "./prettier.config.mjs",
 
   // ESLint設定
   "eslint.useFlatConfig": true,
   "eslint.enable": true,
   "eslint.run": "onType",
-  "eslint.validate": ["javascript", "typescript", "typescriptreact", "javascriptreact"],
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact"
+  ],
 
   // Code Actions on Save（v1.85+の新しい設定方式）
   "editor.codeActionsOnSave": {
@@ -80,7 +85,9 @@
     "**/obj": true,
     "**/.pnpm-store": true,
     "**/coverage": true,
-    "**/.nyc_output": true
+    "**/.nyc_output": true,
+    "**/__pycache__": true,
+    "**/.venv": true
   },
 
   // ファイル自動保存設定

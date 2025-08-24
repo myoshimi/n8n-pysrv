@@ -3,7 +3,10 @@ turbopack
 metaverse
 pixiv
 miniplex
+lxml
 metarenderer
+myoshimi
+beautifulsoup
 flexbox
 scapp
 vercel
@@ -11,9 +14,11 @@ shadcn
 ollama
 fastapi
 uvicorn
+pydantic
 supabase
 gguf
 manypkg
+pysrv
 autodocs
 HSTS
 WCAG

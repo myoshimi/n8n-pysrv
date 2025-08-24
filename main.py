@@ -42,7 +42,7 @@ async def read_root():
     <body>
         <h1>N8N Python Server</h1>
         <p>FastAPIを使用したAPIサーバーが正常に動作しています。</p>
-        
+
         <h2>利用可能なエンドポイント：</h2>
         <div class="endpoint"><strong>GET /</strong> - このページ</div>
         <div class="endpoint"><strong>GET /health</strong> - ヘルスチェック</div>
@@ -52,7 +52,7 @@ async def read_root():
         <div class="endpoint"><strong>PUT /items/{item_id}</strong> - アイテム更新</div>
         <div class="endpoint"><strong>DELETE /items/{item_id}</strong> - アイテム削除</div>
         <div class="endpoint"><strong>GET /docs</strong> - Swagger UI（API仕様書）</div>
-        
+
         <p><a href="/docs">API仕様書を見る</a></p>
     </body>
     </html>

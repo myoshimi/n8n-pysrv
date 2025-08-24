@@ -1,15 +1,15 @@
 # N8N Python Server
 
-FastAPIを使用したPythonAPIサーバーです。N8Nワークフローとの統合に適したRESTful APIを提供します。
+FastAPI を使用した PythonAPI サーバーです。N8N ワークフローとの統合に適した RESTful API を提供します。
 
 ## 機能
 
-- FastAPIベースのRESTful API
-- Swagger UIによる自動API仕様書生成
+- FastAPI ベースの RESTful API
+- Swagger UI による自動 API 仕様書生成
 - ヘルスチェックエンドポイント
-- CRUD操作対応のアイテム管理
+- CRUD 操作対応のアイテム管理
 - メッセージ処理エンドポイント
-- Dockerコンテナサポート
+- Docker コンテナサポート
 
 ## API エンドポイント
 
@@ -21,16 +21,16 @@ FastAPIを使用したPythonAPIサーバーです。N8Nワークフローとの�
 - `PUT /items/{item_id}` - アイテム更新
 - `DELETE /items/{item_id}` - アイテム削除
 - `POST /message` - メッセージ処理
-- `GET /docs` - Swagger UI（API仕様書）
+- `GET /docs` - Swagger UI（API 仕様書）
 
-## Dockerでの実行方法
+## Docker での実行方法
 
 ### 前提条件
 
 - Docker
 - Docker Compose
 
-### 1. Docker Composeを使用（推奨）
+### 1. Docker Compose を使用（推奨）
 
 ```bash
 # コンテナをビルドして起動
@@ -46,7 +46,7 @@ docker-compose logs -f
 docker-compose down
 ```
 
-### 2. Dockerコマンドを直接使用
+### 2. Docker コマンドを直接使用
 
 ```bash
 # イメージをビルド
@@ -58,32 +58,59 @@ docker run -p 8000:8000 n8n-python-server
 
 ## ローカル開発での実行方法
 
-### 1. 依存関係のインストール
+### 前提条件
+
+- Python 3.11 以上
+- Poetry
+
+### 1. Poetry のインストール（まだの場合）
 
 ```bash
-pip install -r requirements.txt
+# macOS/Linux
+curl -sSL https://install.python-poetry.org | python3 -
+
+# Windows PowerShell
+(Invoke-WebRequest -Uri https://install.python-poetry.org -UseBasicParsing).Content | py -
 ```
 
-### 2. サーバー起動
+### 2. 依存関係のインストール
 
 ```bash
-# Python直接実行
-python main.py
+# プロジェクトルートで実行
+poetry install
+```
 
-# またはuvicornコマンド
+### 3. サーバー起動
+
+```bash
+# Poetry環境でPython直接実行
+poetry run python main.py
+
+# またはPoetry環境でuvicornコマンド
+poetry run uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+```
+
+### 4. Poetry shell（オプション）
+
+```bash
+# Poetry仮想環境に入る
+poetry shell
+
+# その後は通常のコマンドが使える
+python main.py
 uvicorn main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 ## アクセス方法
 
-サーバー起動後、以下のURLでアクセスできます：
+サーバー起動後、以下の URL でアクセスできます：
 
 - **メインページ**: http://localhost:8000
-- **API仕様書**: http://localhost:8000/docs
+- **API 仕様書**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
 - **ヘルスチェック**: http://localhost:8000/health
 
-## API使用例
+## API 使用例
 
 ### ヘルスチェック
 
@@ -115,19 +142,19 @@ curl -X POST "http://localhost:8000/message" \
   }'
 ```
 
-## N8Nでの使用
+## N8N での使用
 
-このサーバーはN8Nワークフローから以下のように使用できます：
+このサーバーは N8N ワークフローから以下のように使用できます：
 
-1. **HTTP Requestノード**を使用してAPIエンドポイントを呼び出し
+1. **HTTP Request ノード**を使用して API エンドポイントを呼び出し
 2. **Webhook**ノードでこのサーバーからのデータを受信
 3. **Set**ノードでレスポンスデータを加工
 
-### N8N設定例
+### N8N 設定例
 
 - **Method**: POST
 - **URL**: `http://n8n-python-server:8000/message`
-- **Body**: JSON形式
+- **Body**: JSON 形式
 - **Headers**: `Content-Type: application/json`
 
 ## 開発
@@ -137,10 +164,12 @@ curl -X POST "http://localhost:8000/message" \
 ```
 n8n-pysrv/
 ├── main.py              # FastAPIアプリケーション
-├── requirements.txt     # Python依存関係
+├── pyproject.toml       # Poetry設定・依存関係管理
+├── poetry.lock          # 依存関係のロックファイル
 ├── Dockerfile          # Docker設定
 ├── docker-compose.yml  # Docker Compose設定
 ├── .dockerignore       # Dockerビルド除外ファイル
+├── .gitignore          # Git除外ファイル
 └── README.md           # このファイル
 ```
 
@@ -156,4 +185,4 @@ async def your_function():
 
 ## ライセンス
 
-このプロジェクトはMITライセンスの下で公開されています。
+このプロジェクトは MIT ライセンスの下で公開されています。
