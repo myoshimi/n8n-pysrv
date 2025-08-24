@@ -16,14 +16,15 @@
 
 - **raw** (デフォルト): そのまま返す
 - **markdown**: html2text でマークダウンに変換
+- **readability**: readability で記事本文などメインコンテンツを抽出
 
 ## 使用方法
 
 ```bash
-# Poetry環境での実行（推奨）
-poetry run python main.py <URL> [fetch_method] [process_method]
+# Poetry環境での実行（推奨・プロジェクトルートから）
+poetry run python tools/getURLContent/main.py <URL> [fetch_method] [process_method]
 
-# 仮想環境を直接使用する場合
+# ツールディレクトリで直接実行する場合
 python main.py <URL> [fetch_method] [process_method]
 ```
 
@@ -39,6 +40,9 @@ python main.py https://example.com request markdown
 # ヘッドレスブラウザ + マークダウン変換（SPA対応）
 python main.py https://example.com browser markdown
 
+# 記事本文抽出（READABILITY）
+python main.py https://example.com request readability
+
 # ブラウザでHTMLそのまま取得
 python main.py https://example.com browser raw
 
@@ -48,12 +52,14 @@ python main.py
 
 ## 利用可能な組み合わせ
 
-| 取得方法 | 処理方法 | 用途                             |
-| -------- | -------- | -------------------------------- |
-| request  | raw      | 軽量、高速、HTML そのまま        |
-| request  | markdown | 軽量、構造化、読みやすい（推奨） |
-| browser  | raw      | JS 対応、HTML そのまま           |
-| browser  | markdown | JS 対応、構造化（SPA 推奨）      |
+| 取得方法 | 処理方法   | 用途                                   |
+| -------- | ---------- | -------------------------------------- |
+| request  | raw        | 軽量・高速、HTMLそのまま               |
+| request  | markdown   | 軽量・構造化・読みやすい（推奨）       |
+| request  | readability| 軽量・記事本文抽出（ニュース/ブログ） |
+| browser  | raw        | JS対応、HTMLそのまま                   |
+| browser  | markdown   | JS対応・構造化（SPA/SSR混在に有効）    |
+| browser  | readability| JS対応・記事本文抽出（SPA記事に最適） |
 
 ## 必要な依存関係
 
@@ -61,6 +67,7 @@ python main.py
 - requests ライブラリ
 - html2text (markdown 処理用)
 - playwright (browser 取得用)
+- readability-lxml (readability 処理用)
 
 依存関係は既に poetry で管理されているため、プロジェクトルートで以下を実行：
 
@@ -93,6 +100,28 @@ This domain is for use in illustrative examples in documents...
 コンテンツ長: 512 文字
 ```
 
+### REQUEST + READABILITY モード（例）
+
+```
+URLからコンテンツを取得中: https://example.com/article
+取得方法: request
+処理方法: readability
+
+🌍 HTTPリクエスト送信中...
+📰 readabilityでメインコンテンツ抽出を実行...
+
+==================================================
+取得したコンテンツ:
+取得: request, 処理: readability
+==================================================
+# 記事タイトル
+
+本文の抜粋...
+
+==================================================
+コンテンツ長: 1024 文字
+```
+
 ## エラーハンドリング
 
 - 無効な URL
@@ -106,7 +135,11 @@ This domain is for use in illustrative examples in documents...
 動作テストを実行：
 
 ```bash
+# tools/getURLContent ディレクトリで実行
 python test_url_utils.py
+
+# ルートからPoetry経由で実行
+poetry run python tools/getURLContent/test_url_utils.py
 ```
 
 ## プログラム的な使用
@@ -130,7 +163,31 @@ spa_content = get_url_content(
     fetch_method=FetchMethod.BROWSER,
     process_method=ProcessMethod.MARKDOWN
 )
+
+# 記事本文抽出（READABILITY）
+readable = get_url_content(
+    "https://news.example.com/article",
+    fetch_method=FetchMethod.REQUEST,
+    process_method=ProcessMethod.READABILITY
+)
+
+# ヘルパー関数の例
+from tools.utils.url_utils import (
+    get_plain_content,
+    get_browser_content_as_markdown,
+    get_readable_content,
+)
+
+plain = get_plain_content("https://example.com")
+md_by_browser = get_browser_content_as_markdown("https://example.com/spa")
+article = get_readable_content("https://news.example.com/article")
 ```
+
+## オプション（共通パラメータ）
+
+- `timeout`: リクエストのタイムアウト秒数（デフォルト: 30）
+- `wait_for_js`: `browser` 取得時のJS実行待機ミリ秒（デフォルト: 3000）
+- `headers`: 追加のHTTPヘッダー（User-Agent等の上書きに利用）
 
 ## 設計の利点
 

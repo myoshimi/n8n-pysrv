@@ -11,6 +11,7 @@ flexbox
 scapp
 vercel
 shadcn
+KHTML
 ollama
 fastapi
 uvicorn
